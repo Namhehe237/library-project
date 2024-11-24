@@ -8,12 +8,10 @@ import { LibraryServices } from "./Components/LibraryServices";
 export const HomePage = () => {
     return (
         <div>
-            <NavBar />
             <ExploreTopBook />
             <Carousel />
             <Heros />
             <LibraryServices />
-            <Footer />
         </div>
     );
 }
