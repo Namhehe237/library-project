@@ -50,10 +50,6 @@ export const StarsReview: React.FC<{ Rating: number, size: number }> = (props) =
                     </svg>
                 )
             }
-
-
-
-
         </div>
     );
 }
