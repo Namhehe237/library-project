@@ -34,19 +34,15 @@ export const NavBar = () => {
                     <ul className="navbar-nav ms-auto">
                         {!authState.isAuthenticated ?
                             <li className="nav-item m-1">
-                                <a href="#" type="button" className="btn btn-outline-light">Sign in</a>
+                                <a href="/login" type="button" className="btn btn-outline-light">Sign in</a>
                             </li>
                             :
                             <li>
-                                <button className="btn btn-outline-light" onClick={handleLogout}>Logout</button>
+                                <button className="btn btn-outline-light" onClick={handleLogout}>Log out</button>
                             </li>
                         }
                     </ul>
-                    <ul className='navbar-nav ms-auto'>
-                        <li className='nav-item m-1'>
-                            <a type='button' className='btn btn-outline-light' href="#">Sign in</a>
-                        </li>
-                    </ul>
+                  
                 </div>
             </div>
         </nav>
