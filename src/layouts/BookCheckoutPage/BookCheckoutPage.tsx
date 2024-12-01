@@ -53,12 +53,12 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchBookReviews = async () => {
-            const reviewUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?BookId=${bookId}`;
+            const reviewUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`;
 
             const responseReviews = await fetch(reviewUrl);
 
             if (!responseReviews.ok) {
-                throw new Error("Something wrong!");
+                throw new Error('Something went wrong!');
             }
 
             const responseJsonReviews = await responseReviews.json();
@@ -67,7 +67,7 @@ export const BookCheckoutPage = () => {
 
             const loadedReviews: ReviewModel[] = [];
 
-            let weightedStartReviews: number = 0;
+            let weightedStarReviews: number = 0;
 
             for (const key in responseData) {
                 loadedReviews.push({
@@ -75,26 +75,26 @@ export const BookCheckoutPage = () => {
                     userEmail: responseData[key].userEmail,
                     date: responseData[key].date,
                     rating: responseData[key].rating,
-                    book_id: responseData[key].book_id,
+                    book_id: responseData[key].bookId,
                     reviewDescription: responseData[key].description,
                 });
-                weightedStartReviews = weightedStartReviews + responseData[key].rating;
+                weightedStarReviews = weightedStarReviews + responseData[key].rating;
             }
 
             if (loadedReviews) {
-                const round = (Math.round((weightedStartReviews / loadedReviews.length) * 2) / 2).toFixed(1);
+                const round = (Math.round((weightedStarReviews / loadedReviews.length) * 2) / 2).toFixed(1);
                 setTotalStars(Number(round));
             }
 
             setReviews(loadedReviews);
-            setIsLoadingBook(false)
-
+            setIsLoadingReviews(false);
         };
+
         fetchBookReviews().catch((error: any) => {
             setIsLoadingReviews(false);
             setHttpError(error.message);
         })
-    }, [])
+    }, []);
 
     if (isLoadingBook) {
         return (
@@ -126,7 +126,7 @@ export const BookCheckoutPage = () => {
                             <h2>{book?.title}</h2>
                             <h5 className="text-primary">{book?.author}</h5>
                             <p className="lead">{book?.description}</p>
-                            <StarsReview Rating={3.5} size={32} />
+                            <StarsReview rating={totalStars} size={32} />
                         </div>
                     </div>
                     <CheckOutAndReviewBox book={book} mobile={false} />
