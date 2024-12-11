@@ -3,7 +3,7 @@ import BookModel from "../../models/BookModel";
 
 export const CheckOutAndReviewBox: React.FC<{
     book: BookModel | undefined, mobile: boolean, currentLoansCount: number,
-    isAuthentication: any, isCheckedOut: boolean
+    isAuthentication: any, isCheckedOut: boolean, checkoutBook : any
 }> = (props) => {
 
     function buttonRender() {
@@ -32,8 +32,8 @@ export const CheckOutAndReviewBox: React.FC<{
             <div className="card-body container">
                 <div className="mt-3">
                     <p>
-                        <b>{props.currentLoansCount} </b>
-                        books checked out
+                        <b>{props.currentLoansCount}/5</b>
+                        books checked out 
                     </p>
                     <hr />
                     {props.book && props.book.copiesAvailable && props.book.copiesAvailable > 0 ?
